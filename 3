@@ -1,0 +1,67 @@
+import sqlite3
+import csv
+from tkinter.constants import INSERT
+
+# Создание и подключение к БД
+connection = sqlite3.connect('library.db')
+cursor = connection.cursor()
+
+cursor.execute("PRAGMA foreign_keys = ON")
+
+# Создание таблиц
+# Таблица стран и пользвателей
+cursor.execute("""
+CREATE TABLE countries (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    best_season TEXT NOT NULL,
+    has_sea INTEGER NOT NULL,
+    users_id TEXT NOT NULL,
+    country_id TEXT NOT NULL
+)
+""")
+# Таблица городов
+cursor.execute("""
+CREATE TABLE cities (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    users_id TEXT NOT NULL,
+    country_id INTEGER NOT NULL,
+    name TEXT NOT NULL,
+    place TEXT NOT NULL,
+    cost TEXT NOT NULL,
+    FOREIGN KEY (users_id) PEFERENCES countries(id)
+    FOREIGN KEY (country_id) PEFERENCES countries(id)
+)
+""")
+# Таблица планов
+cursor.execute("""
+CREATE TABLE travel_plans (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    users_id TEXT NO NULL,
+    country_id INTEGER NOT NULL,
+    planned INTEGER NOT NULL,
+    day INTEGER NOT NULL,
+    date_returned  TEXT,
+    FOREIGN KEY (users_id) PEFERENCES countries(id)
+     FOREIGN KEY (country_id) PEFERENCES countries(id)
+    )
+    
+               
+   
+""")
+
+cursor.execute(""""
+INSERT INTO countries (name, )
+VALUES ()
+
+#ПОЛЬЗОВАТЕЛЬ ВВОДИТ
+print("Введите имя")
+user_name = input()
+
+cursor.execute
+
+#через случайные значения 
+users_array = [("Петя", 17), ("Илья", 18), ("Надя", 19), ("Марина",12)]
+cursor.execule(""" skl:
+INSERT INTO users (name) VALUES(?)
+"""", users_array )
